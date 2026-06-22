@@ -23,7 +23,11 @@ const pool = mysql.createPool({
   queueLimit: 0,
 
   // Часовий пояс для коректної роботи з TIMESTAMP
-  timezone: '+00:00'
+  timezone: '+00:00',
+
+  // SSL для хмарних провайдерів (DigitalOcean, PlanetScale тощо)
+  // Активується через змінну оточення DB_SSL=true
+  ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: false } : undefined
 });
 
 module.exports = pool;

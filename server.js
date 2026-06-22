@@ -19,9 +19,14 @@ const PORT = process.env.PORT || 5000;
 
 // ----- Middleware -----
 
-// Дозволяємо крос-доменні запити з фронтенду (Vite — порт 5173)
+// Дозволяємо крос-доменні запити з фронтенду
 app.use(cors({
-  origin: ['http://localhost:5173', 'http://localhost:3000'],
+  origin: [
+    'http://localhost:5173',
+    'http://localhost:3000',
+    process.env.CORS_ORIGIN,
+    process.env.CLIENT_URL || 'https://zodyf.github.io'
+  ].filter(Boolean),
   credentials: true
 }));
 
